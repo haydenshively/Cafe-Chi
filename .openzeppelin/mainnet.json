@@ -1,0 +1,14 @@
+{
+  "contracts": {},
+  "solidityLibs": {},
+  "proxies": {
+    "CafeChi/CafeChi": [
+      {
+        "address": "0x9dB0987bAAC8EAA684Ff54F836a2368109f1761C",
+        "kind": "NonProxy",
+        "bytecodeHash": "5c8aa614716e91c24afbbe430b6654219ce01bb2da808322eac37cd6348cbf6b"
+      }
+    ]
+  },
+  "manifestVersion": "2.2"
+}

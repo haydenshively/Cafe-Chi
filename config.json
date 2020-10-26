@@ -1,0 +1,22 @@
+{
+  "txManagers": {
+    "A": {
+      "envKeyAddress": "ACCOUNT_ADDRESS",
+      "envKeySecret": "ACCOUNT_SECRET",
+      "interval": 60
+    }
+  },
+  "network": {
+    "name": "mainnet",
+    "providers": [
+      {
+        "type": "HTTP_Infura",
+        "envKeyID": "PROVIDER_INFURA_ID"
+      },
+      {
+        "type": "HTTP_Alchemy",
+        "envKeyKey": "PROVIDER_ALCHEMY_KEY"
+      }
+    ]
+  }
+}

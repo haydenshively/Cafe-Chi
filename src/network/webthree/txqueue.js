@@ -174,7 +174,7 @@ class TxQueue {
         this.rebase();
         return;
       }
-      winston.error(label + "Off-chain " + String(err));
+      console.error(label + "Off-chain " + String(err));
       sentTx.removeAllListeners();
     });
   }

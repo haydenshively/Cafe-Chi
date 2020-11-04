@@ -45,6 +45,7 @@ class TxManager {
     tx.gasPrice = maxGasPrice.mul(this._gpFactor);
 
     this._sendAtFirstPossibleNonce(tx);
+    this._queue.rebase();
   }
 
   /**

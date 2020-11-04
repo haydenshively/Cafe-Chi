@@ -24,7 +24,7 @@ for (let key in config.txManagers) {
     txManagerConfig.envKeySecret
   );
   const queue = new TxQueue(wallet);
-  const txManager = new TxManager(queue, txManagerConfig.interval, 10, 0.99);
+  const txManager = new TxManager(queue, txManagerConfig.interval, 5, 0.971);
 
   // Start txManager
   txManager.init();

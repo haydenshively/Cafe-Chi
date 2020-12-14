@@ -59,7 +59,7 @@ class TxManager {
   _sendAtFirstPossibleNonce(tx) {
     for (let i = 0; i < this._queue.length; i++) {
       const existingTx = this._queue.tx(i);
-      if (tx.gasPrice.gte(existingTx.gasPrice)) {
+      if (tx.gasPrice.gte(existingTx.gasPrice.mul(1.10))) {
         this._queue.replace(i, tx, "as_is");
         return;
       }

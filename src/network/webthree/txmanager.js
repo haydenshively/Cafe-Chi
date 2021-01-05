@@ -38,7 +38,7 @@ class TxManager {
     const tx = CafeChi.mainnet.arb();
     tx.gasLimit = Big(await this._queue._wallet.estimateGas(tx));
 
-    const revenue = await Pair.mainnet.amount1ReceivedFor(140)(
+    const revenue = await Pair.mainnet.amount1ReceivedFor(10)(
       this._queue._wallet._provider
     );
     const maxGasPrice = revenue.div(tx.gasLimit);

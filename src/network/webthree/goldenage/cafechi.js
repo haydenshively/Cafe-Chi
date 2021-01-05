@@ -6,12 +6,12 @@ const SmartContract = require("../smartcontract");
 
 class CafeChi extends SmartContract {
   arb() {
-    return this._txFor(this._inner.methods.arb(), Big(7000000));
+    return this._txFor(this._inner.methods.arb(), Big(1000000));
   }
 }
 
 const addresses = {
-  mainnet: "0x9dB0987bAAC8EAA684Ff54F836a2368109f1761C"
+  mainnet: "0xd5B74F6ef00d4Cf1F1dc03b89214fcB654FC31d3"
 };
 
 const abi = require("../abis/goldenage/cafechi.json");

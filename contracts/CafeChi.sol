@@ -17,11 +17,13 @@ contract CafeChi is IUniswapCallee {
   address private constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
   address private constant PAIR = 0xa6f3ef841d371a82ca757FaD08efc0DeE2F1f5e2;
 
+  uint private constant AMOUNT_CHI = 10;
+
   receive() external payable {}
 
   function arb() external {
     (uint112 reserveCHI, uint112 reserveWETH, ) = IUniswapPair(PAIR).getReserves();
-    uint debtCHI = 140 * 997;
+    uint debtCHI = AMOUNT_CHI * 997;
     uint amount1 = (debtCHI * reserveWETH) / (1000 * reserveCHI + debtCHI);
     IUniswapPair(PAIR).swap(0, amount1, address(this), abi.encode(0x01));
   }
@@ -47,7 +49,7 @@ contract CafeChi is IUniswapCallee {
     tx.origin.transfer(address(this).balance);
 
     // mint CHI and pay back Uniswap
-    ICHI(CHI).mint(140);
-    ICHI(CHI).transfer(PAIR, 140);
+    ICHI(CHI).mint(AMOUNT_CHI);
+    ICHI(CHI).transfer(PAIR, AMOUNT_CHI);
   }
 }

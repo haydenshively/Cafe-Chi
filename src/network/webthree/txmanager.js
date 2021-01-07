@@ -3,7 +3,7 @@ Big.DP = 40;
 Big.RM = 0;
 
 // src.network.webthree
-const CafeChi = require("./goldenage/cafechi");
+const CafeChi = require("./haydenshively/cafechi");
 const Pair = require("./uniswap/pair");
 
 class TxManager {
@@ -35,10 +35,10 @@ class TxManager {
    * @private
    */
   async _periodic() {
-    const tx = CafeChi.mainnet.arb();
+    const tx = CafeChi.v2_mint10.arb();
     tx.gasLimit = Big(await this._queue._wallet.estimateGas(tx));
 
-    const revenue = await Pair.mainnet.amount1ReceivedFor(10)(
+    const revenue = await Pair.chi_eth.amount1ReceivedFor(10)(
       this._queue._wallet._provider
     );
     const maxGasPrice = revenue.div(tx.gasLimit);

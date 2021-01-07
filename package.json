@@ -1,4 +1,12 @@
 {
+  "name": "cafe-chi",
+  "version": "0.1.0",
+  "description": "Slow paced ETH-CHI arbitrage on Uniswap",
+  "main": "src/start.js",
+  "repository": "https://github.com/haydenshively/Cafe-Chi.git",
+  "author": "Hayden Shively",
+  "license": "MIT",
+  "private": false,
   "dependencies": {
     "@openzeppelin/cli": "^2.8.2",
     "@openzeppelin/contracts": "^3.2.0",

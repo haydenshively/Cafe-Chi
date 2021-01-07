@@ -67,7 +67,7 @@ class Pair extends SmartContract {
 }
 
 const addresses = {
-  mainnet: "0xa6f3ef841d371a82ca757FaD08efc0DeE2F1f5e2"
+  chi_eth: "0xa6f3ef841d371a82ca757FaD08efc0DeE2F1f5e2"
 };
 
 const abi = require("@uniswap/v2-core/build/IUniswapV2Pair.json").abi;

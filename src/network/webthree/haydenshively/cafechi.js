@@ -11,10 +11,11 @@ class CafeChi extends SmartContract {
 }
 
 const addresses = {
-  mainnet: "0xd5B74F6ef00d4Cf1F1dc03b89214fcB654FC31d3"
+  v1_mint140: "0x9dB0987bAAC8EAA684Ff54F836a2368109f1761C",
+  v2_mint10: "0xd5B74F6ef00d4Cf1F1dc03b89214fcB654FC31d3"
 };
 
-const abi = require("../abis/goldenage/cafechi.json");
+const abi = require("../abis/haydenshively/cafechi.json");
 for (let net in addresses) {
   exports[net] = new CafeChi(addresses[net], abi);
 }

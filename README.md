@@ -1,5 +1,7 @@
 # Cafe-Chi
 
+![Node.js CI](https://github.com/haydenshively/Cafe-Chi/workflows/Node.js%20CI/badge.svg)
+
 Cafe-Chi is a fully operational arbitrage bot for the [CHI-ETH pair](https://info.uniswap.org/pair/0xa6f3ef841d371a82ca757fad08efc0dee2f1f5e2)
 on Uniswap. Most arbitrage relies on complex routing algorithms to find the most
 profitable path through a series of exchanges. In contrast, Cafe-Chi takes advantage

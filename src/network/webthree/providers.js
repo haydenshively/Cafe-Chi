@@ -26,20 +26,30 @@ const HTTPProvider = path => {
 const ProviderFor = (chain, spec) => {
   switch (spec.type) {
     case "IPC":
+      if (process.env[spec.envKeyPath] === undefined)
+        console.error(`.env file contains no entry at ${spec.envKeyPath}`);
       return IPCProvider(process.env[spec.envKeyPath]);
     case "WS_Infura":
+      if (process.env[spec.envKeyID] === undefined)
+        console.error(`.env file contains no entry at ${spec.envKeyID}`);
       return WSProvider(
         `wss://${chain}.infura.io/ws/v3/` + process.env[spec.envKeyID]
       );
     case "WS_Alchemy":
+      if (process.env[spec.envKeyKey] === undefined)
+        console.error(`.env file contains no entry at ${spec.envKeyKey}`);
       return WSProvider(
         `wss://eth-${chain}.ws.alchemyapi.io/v2/` + process.env[spec.envKeyKey]
       );
     case "HTTP_Infura":
+      if (process.env[spec.envKeyID] === undefined)
+        console.error(`.env file contains no entry at ${spec.envKeyID}`);
       return HTTPProvider(
         `https://${chain}.infura.io/v3/` + process.env[spec.envKeyID]
       );
     case "HTTP_Alchemy":
+      if (process.env[spec.envKeyKey] === undefined)
+        console.error(`.env file contains no entry at ${spec.envKeyKey}`);
       return HTTPProvider(
         `https://eth-${chain}.alchemyapi.io/v2/` + process.env[spec.envKeyKey]
       );

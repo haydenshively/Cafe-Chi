@@ -7,11 +7,11 @@ global.web3 = {};
 const { MultiSendProvider } = require("../src/network/webthree/providers");
 const infura = {
   type: "WS_Infura",
-  envKeyID: "PROVIDER_INFURA_ID"
+  envKeyID: "PROVIDER_INFURA_ID" // This is the name of the env variable storing the ID, NOT THE ID ITSELF
 };
 const alchemy = {
   type: "WS_Alchemy",
-  envKeyKey: "PROVIDER_ALCHEMY_KEY"
+  envKeyKey: "PROVIDER_ALCHEMY_KEY" // This is the name of the env variable storing the key, NOT THE KEY ITSELF
 };
 web3.mainnet = new MultiSendProvider("mainnet", [infura, alchemy]);
 // configure ganache

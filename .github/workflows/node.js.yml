@@ -1,0 +1,38 @@
+# This workflow will do a clean install of node dependencies and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  pull_request:
+    branches: 
+      - master
+
+env:
+  PROVIDER_INFURA_ID: ${{ secrets.PROVIDER_INFURA_ID }}
+  PROVIDER_ALCHEMY_KEY: ${{ secrets.PROVIDER_ALCHEMY_KEY }}
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 14
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+    
+    - name: Create .env file
+      run: |
+        touch .env
+        echo "PROVIDER_INFURA_ID"=$PROVIDER_INFURA_ID >> .env
+        echo "PROVIDER_ALCHEMY_KEY"=$PROVIDER_ALCHEMY_KEY >> .env
+    
+    - run: yarn install
+    - run: yarn test

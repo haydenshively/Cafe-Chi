@@ -1,14 +1,28 @@
 const Web3 = require("web3");
 const net = require("net");
 
-const IPCProvider = path => {
-  return new Web3(path, net);
+const IPCProvider = (path) => {
+  console.log(path);
+  return new Web3(new Web3.providers.IpcProvider(path, net));
 };
-const WSProvider = path => {
-  return new Web3(path);
+const WSProvider = (path) => {
+  return new Web3(
+    new Web3.providers.WebsocketProvider(path, {
+      clientConfig: {
+        keepalive: true,
+        keepaliveInterval: 60000
+      },
+      reconnect: {
+        auto: true,
+        delay: 5000,
+        maxAttempts: 10,
+        onTimeout: true
+      }
+    })
+  );
 };
-const HTTPProvider = path => {
-  return new Web3(path);
+const HTTPProvider = (path) => {
+  return new Web3(new Web3.providers.HttpProvider(path));
 };
 
 /**

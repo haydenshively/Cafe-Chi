@@ -1,0 +1,663 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "contract IUniswapV3Pool",
+        "name": "_UNI_POOL",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint24",
+        "name": "epoch",
+        "type": "uint24"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "epochStartTime",
+        "type": "uint32"
+      }
+    ],
+    "name": "Advanced",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint24",
+        "name": "epoch",
+        "type": "uint24"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint40",
+        "name": "key",
+        "type": "uint40"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint80",
+        "name": "amount",
+        "type": "uint80"
+      }
+    ],
+    "name": "ClaimedReward",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint176",
+        "name": "lower",
+        "type": "uint176"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint176",
+        "name": "upper",
+        "type": "uint176"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "didInvertPrices",
+        "type": "bool"
+      }
+    ],
+    "name": "FetchedGroundTruth",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "source",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint24",
+        "name": "epoch",
+        "type": "uint24"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint40",
+        "name": "key",
+        "type": "uint40"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint176",
+        "name": "lower",
+        "type": "uint176"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint176",
+        "name": "upper",
+        "type": "uint176"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint80",
+        "name": "stake",
+        "type": "uint80"
+      }
+    ],
+    "name": "ProposalSubmitted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "source",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint24",
+        "name": "epoch",
+        "type": "uint24"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint40",
+        "name": "key",
+        "type": "uint40"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint176",
+        "name": "lower",
+        "type": "uint176"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint176",
+        "name": "upper",
+        "type": "uint176"
+      }
+    ],
+    "name": "ProposalUpdated",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "ALOE",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "EPOCH_LENGTH_SECONDS",
+    "outputs": [
+      {
+        "internalType": "uint32",
+        "name": "",
+        "type": "uint32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "GROUND_TRUTH_STDDEV_SCALE",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "NUM_PROPOSALS_TO_AGGREGATE",
+    "outputs": [
+      {
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "UNI_POOL",
+    "outputs": [
+      {
+        "internalType": "contract IUniswapV3Pool",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "advance",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "aggregate",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint176",
+            "name": "lower",
+            "type": "uint176"
+          },
+          {
+            "internalType": "uint176",
+            "name": "upper",
+            "type": "uint176"
+          }
+        ],
+        "internalType": "struct Bounds",
+        "name": "bounds",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint40",
+        "name": "key",
+        "type": "uint40"
+      }
+    ],
+    "name": "claimReward",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "current",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint176",
+            "name": "lower",
+            "type": "uint176"
+          },
+          {
+            "internalType": "uint176",
+            "name": "upper",
+            "type": "uint176"
+          }
+        ],
+        "internalType": "struct Bounds",
+        "name": "",
+        "type": "tuple"
+      },
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "didInvertPrices",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "epoch",
+    "outputs": [
+      {
+        "internalType": "uint24",
+        "name": "",
+        "type": "uint24"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "epochExpectedEndTime",
+    "outputs": [
+      {
+        "internalType": "uint32",
+        "name": "",
+        "type": "uint32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "epochStartTime",
+    "outputs": [
+      {
+        "internalType": "uint32",
+        "name": "",
+        "type": "uint32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "fetchGroundTruth",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint176",
+            "name": "lower",
+            "type": "uint176"
+          },
+          {
+            "internalType": "uint176",
+            "name": "upper",
+            "type": "uint176"
+          }
+        ],
+        "internalType": "struct Bounds",
+        "name": "bounds",
+        "type": "tuple"
+      },
+      {
+        "internalType": "bool",
+        "name": "shouldInvertPricesNext",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "highestStakeKeys",
+    "outputs": [
+      {
+        "internalType": "uint40",
+        "name": "",
+        "type": "uint40"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nextProposalKey",
+    "outputs": [
+      {
+        "internalType": "uint40",
+        "name": "",
+        "type": "uint40"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint40",
+        "name": "",
+        "type": "uint40"
+      }
+    ],
+    "name": "proposals",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "source",
+        "type": "address"
+      },
+      {
+        "internalType": "uint24",
+        "name": "epoch",
+        "type": "uint24"
+      },
+      {
+        "internalType": "uint176",
+        "name": "lower",
+        "type": "uint176"
+      },
+      {
+        "internalType": "uint176",
+        "name": "upper",
+        "type": "uint176"
+      },
+      {
+        "internalType": "uint80",
+        "name": "stake",
+        "type": "uint80"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "selectedOracleTimetable",
+    "outputs": [
+      {
+        "internalType": "uint32[]",
+        "name": "secondsAgos",
+        "type": "uint32[]"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "shouldInvertPrices",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint176",
+        "name": "lower",
+        "type": "uint176"
+      },
+      {
+        "internalType": "uint176",
+        "name": "upper",
+        "type": "uint176"
+      },
+      {
+        "internalType": "uint80",
+        "name": "stake",
+        "type": "uint80"
+      }
+    ],
+    "name": "submitProposal",
+    "outputs": [
+      {
+        "internalType": "uint40",
+        "name": "key",
+        "type": "uint40"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint24",
+        "name": "",
+        "type": "uint24"
+      }
+    ],
+    "name": "summaries",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint176",
+            "name": "lower",
+            "type": "uint176"
+          },
+          {
+            "internalType": "uint176",
+            "name": "upper",
+            "type": "uint176"
+          }
+        ],
+        "internalType": "struct Bounds",
+        "name": "groundTruth",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint176",
+            "name": "lower",
+            "type": "uint176"
+          },
+          {
+            "internalType": "uint176",
+            "name": "upper",
+            "type": "uint176"
+          }
+        ],
+        "internalType": "struct Bounds",
+        "name": "aggregate",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint40",
+            "name": "proposalCount",
+            "type": "uint40"
+          },
+          {
+            "internalType": "uint80",
+            "name": "stakeTotal",
+            "type": "uint80"
+          },
+          {
+            "internalType": "uint256",
+            "name": "stake1stMomentRaw",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "sumOfLowerBounds",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "sumOfLowerBoundsWeighted",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "sumOfUpperBounds",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "sumOfUpperBoundsWeighted",
+            "type": "uint256"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "LS",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "MS",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct UINT512",
+            "name": "sumOfSquaredBounds",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "LS",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "MS",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct UINT512",
+            "name": "sumOfSquaredBoundsWeighted",
+            "type": "tuple"
+          }
+        ],
+        "internalType": "struct Accumulators",
+        "name": "accumulators",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint40",
+        "name": "key",
+        "type": "uint40"
+      },
+      {
+        "internalType": "uint176",
+        "name": "lower",
+        "type": "uint176"
+      },
+      {
+        "internalType": "uint176",
+        "name": "upper",
+        "type": "uint176"
+      }
+    ],
+    "name": "updateProposal",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

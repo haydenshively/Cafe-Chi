@@ -1,12 +1,16 @@
 require("dotenv").config();
-const config = require(process.argv[2]);
 
 // configure web3
-const { MultiSendProvider } = require("./network/webthree/providers");
-global.web3 = new MultiSendProvider(
-  config.network.name,
-  config.network.providers
-);
+const { ProviderFor } = require("./network/webthree/providers");
+global.web3 = ProviderFor("mainnet", {
+  type: "WS_Alchemy",
+  envKeyPath: "PROVIDER_IPC_PATH",
+  envKeyKey: "PROVIDER_ALCHEMY_KEY"
+});
+global.web3kovan = ProviderFor("kovan", {
+  type: "HTTP_Alchemy",
+  envKeyKey: "PROVIDER_ALCHEMY_KEY_KOVAN"
+});
 
 // configure winston
 const winston = require("winston");
@@ -18,11 +22,11 @@ winston.configure({
   ),
   transports: [
     new winston.transports.Console({ handleExceptions: true }),
-    new SlackHook({
-      level: "info",
-      webhookUrl: process.env.SLACK_WEBHOOK,
-      mrkdwn: true
-    })
+    // new SlackHook({
+    //   level: "info",
+    //   webhookUrl: process.env.SLACK_WEBHOOK,
+    //   mrkdwn: true
+    // })
   ],
   exitOnError: false
 });

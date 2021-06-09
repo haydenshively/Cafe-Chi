@@ -5,41 +5,32 @@ const Wallet = require("./network/webthree/wallet");
 const TxQueue = require("./network/webthree/txqueue");
 const TxManager = require("./network/webthree/txmanager");
 
-// MARK: LOAD AND VERIFY CONFIG.JSON --------------------------------
-if (process.argv.length < 3) {
-  console.error("Please pass path to config*.json");
-  process.exit();
-}
-const config = require(process.argv[2]);
-
 // MARK: SETUP TRANSACTION MANAGERS ---------------------------------
-let txManagers = {};
-for (let key in config.txManagers) {
-  const txManagerConfig = config.txManagers[key];
+const wallet = new Wallet(
+  web3,
+  'ALOE_MAINNET_ADDRESS',
+  'ALOE_MAINNET_SECRET'
+);
+const queue = new TxQueue(wallet);
+const walletKovan = new Wallet(
+  web3kovan,
+  'ALOE_KOVAN_ADDRESS',
+  'ALOE_KOVAN_SECRET'
+);
+const queueKovan = new TxQueue(walletKovan);
 
-  // Construct a txManager
-  const wallet = new Wallet(
-    web3,
-    txManagerConfig.envKeyAddress,
-    txManagerConfig.envKeySecret
-  );
-  const queue = new TxQueue(wallet);
-  const txManager = new TxManager(
-    queue,
-    txManagerConfig.interval,
-    Number(txManagerConfig.numPending),
-    Number(txManagerConfig.ratio)
-  );
+const txManager = new TxManager(
+  queue,
+  queueKovan,
+  60
+);
 
-  // Start txManager
-  txManager.init();
-  // Store txManager
-  txManagers[key] = txManager;
-}
+// Start txManager
+txManager.init();
 
 process.on("SIGINT", () => {
   console.log("\nCaught interrupt signal");
-  for (key in txManagers) txManagers[key].stop();
+  txManager.stop();
 
   web3.eth.clearSubscriptions();
   try {
